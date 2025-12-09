@@ -279,6 +279,9 @@ window.addEventListener('scroll', () => {
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // Hero section entrance animation
+// Check for reduced motion preference
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const heroSection = document.querySelector('.hero');
 if (heroSection) {
     // Trigger animation on page load
@@ -288,21 +291,49 @@ if (heroSection) {
         }
     };
     
-    // Trigger immediately if hero is in viewport
-    if (window.innerHeight > 0) {
-        triggerHeroAnimation();
-    }
-    
-    // Also observe for when hero enters viewport (handles scroll-to-top case)
-    const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !heroSection.classList.contains('animated')) {
-                heroSection.classList.add('animated');
+    // If user prefers reduced motion, show content immediately
+    if (prefersReducedMotion) {
+        heroSection.classList.add('animated');
+    } else {
+        // Trigger animation reliably on page load for all screen sizes
+        // Use multiple methods to ensure it works on mobile
+        const initHeroAnimation = () => {
+            // Small delay to ensure DOM is ready and styles are applied
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    triggerHeroAnimation();
+                });
+            });
+        };
+        
+        // Try multiple triggers to ensure it works on all devices
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initHeroAnimation);
+        } else {
+            initHeroAnimation();
+        }
+        
+        // Also trigger on window load as fallback
+        window.addEventListener('load', () => {
+            if (!heroSection.classList.contains('animated')) {
+                triggerHeroAnimation();
             }
         });
-    }, { threshold: 0.1 });
-    
-    heroObserver.observe(heroSection);
+        
+        // Also observe for when hero enters viewport (handles scroll-to-top case)
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !heroSection.classList.contains('animated')) {
+                    heroSection.classList.add('animated');
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px'
+        });
+        
+        heroObserver.observe(heroSection);
+    }
 }
 
 // Mobile Menu Functionality

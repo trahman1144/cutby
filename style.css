@@ -355,25 +355,25 @@ h1, h2, h3, h4, h5 {
 .hero-logo {
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 .hero-tagline {
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s;
+    transition: opacity 0.4s ease-out 0.15s, transform 0.4s ease-out 0.15s;
 }
 
 .hero-button {
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.5s ease-out 0.4s, transform 0.5s ease-out 0.4s;
+    transition: opacity 0.4s ease-out 0.3s, transform 0.4s ease-out 0.3s;
 }
 
 .hero-social-icons {
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.6s;
+    transition: opacity 0.4s ease-out 0.45s, transform 0.4s ease-out 0.45s;
 }
 
 .hero.animated .hero-logo,
@@ -382,6 +382,18 @@ h1, h2, h3, h4, h5 {
 .hero.animated .hero-social-icons {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .hero-logo,
+    .hero-tagline,
+    .hero-button,
+    .hero-social-icons {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 .logo-hero {
