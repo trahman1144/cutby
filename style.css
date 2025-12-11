@@ -407,7 +407,7 @@ h1, h2, h3, h4, h5 {
     font-size: clamp(19px, 2.5vw, 24px);
     margin-bottom: 50px;
     color: #444444;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.04em;
     line-height: 1.6;
 }
@@ -994,12 +994,37 @@ h1, h2, h3, h4, h5 {
     font-style: italic;
 }
 
+.address-helper {
+    text-align: center;
+    font-size: 14px;
+    opacity: 0.6;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.map-wrapper {
+    margin: 60px auto 0;
+    text-align: center;
+}
+
+.map-heading {
+    font-size: 26px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    color: #111111;
+}
+
 .map-container {
-    max-width: 800px;
-    margin: 50px auto 0;
-    border-radius: 8px;
+    max-width: 100%;
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .map-iframe {
@@ -1343,6 +1368,14 @@ h1, h2, h3, h4, h5 {
 
     .find-us-content {
         text-align: center;
+    }
+
+    .map-wrapper {
+        margin: 40px auto 0;
+    }
+
+    .map-container {
+        width: 100%;
     }
 
     .hours-table {
